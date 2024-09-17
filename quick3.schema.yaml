@@ -1,0 +1,106 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: quick3
+  name: 速成3代2022補完計劃
+  version: "0.1a"
+  author:
+    - sheaahhoi1
+  description: |
+    速成詞句連打
+    這是精簡版,因為另一個是3/5/6混碼
+    MS 微軟是3代老用戶直到win11 24H2,也是3代是字碼系統
+    倉頡3代碼表2022補完計劃來源:
+    https://github.com/Arthurmcarthur/Cangjie3-Plus
+    cj3.txt版本:2023/9/9更新,至yysb=𫑉,字庫說明原因
+  dependencies:
+    - luna_quanpin
+
+switches:
+# 默認開啓Unihan全字集    
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 英文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+    reset: 0
+  - name: simplification
+    states: [ 漢字, 汉字 ]
+    reset: 0
+  - name: ascii_punct
+    states: [ 。，, ．， ]        #中西文标点切换开关,0 为中文句读，1 为西文标点。
+    reset: 1
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - reverse_lookup_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " ;'"
+  algebra:
+    - 'derive/^([^z])\w+(\w)$/$1$2/'  # 取倉頡首尾二碼爲速成碼
+
+translator:
+  dictionary: quick3_8m6_2022
+  prism: quick3_8m6_2022
+  preedit_format:
+    - "xlit|abcdefghijklmnopqrstuvwxyz;'|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符··|"
+  comment_format:
+    - "xlit|abcdefghijklmnopqrstuvwxyz~|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符～|"
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+    - "^yyy.*$"
+
+abc_segmentor:
+  extra_tags:
+    - reverse_lookup
+
+reverse_lookup:
+  dictionary: luna_pinyin
+  prism: luna_quanpin
+  prefix: "`"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+  comment_format:
+    - "xlit|abcdefghijklmnopqrstuvwxyz|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符|"
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "`[a-z]*'?$"
+  
+menu:
+  # 候选词个数
+  page_size: 9
