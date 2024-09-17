@@ -8,7 +8,7 @@ MS 微軟是3代老用戶直到win11 24H2,也是3代是字碼系統
 <br>
 倉頡3代碼表2022補完計劃來源:
 <br>
-    <font size="10"><a https://github.com/Arthurmcarthur/Cangjie3-Plus>https://github.com/Arthurmcarthur/Cangjie3-Plus</a></font>
+    <font size="10"><a  href="https://github.com/Arthurmcarthur/Cangjie3-Plus">https://github.com/Arthurmcarthur/Cangjie3-Plus</a></font>
 <br>
 cj3.txt版本:2023/9/9更新,至yysb=𫑉,這名為quick3_8m6_2022.dict.yaml
 <br>
