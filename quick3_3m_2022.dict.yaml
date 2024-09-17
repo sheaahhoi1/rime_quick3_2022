@@ -9,7 +9,8 @@
 name: "quick3a"
 version: "0.1a"
 sort: by_weight
-use_preset_vocabulary: true
+#use_preset_vocabulary：选择是否导入默认词汇表【八股文】〔true 或 false〕,不要干擾詞庫
+use_preset_vocabulary: false
 max_phrase_length: 25
 min_phrase_weight: 100
 #import_tables:
